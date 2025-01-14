@@ -11,7 +11,6 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
     id: relayInterfaceId,
     description: 'Nostr clients use this interface to connect to the relay',
     type: 'api',
-    hasPrimary: false,
     masked: false,
     schemeOverride: null,
     username: null,
