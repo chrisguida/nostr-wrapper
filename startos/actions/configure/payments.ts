@@ -5,7 +5,7 @@ const { InputSpec, Value, Variants } = sdk
 
 // input spec
 const inputSpec = InputSpec.of({
-  enabled: Value.union(
+  pay_to_relay: Value.union(
     {
       name: 'Pay to Relay',
       default: 'disabled',
@@ -142,7 +142,7 @@ export const configurePayments = sdk.Action.withInput(
     if (!pay_to_relay) return
 
     return {
-      enabled: pay_to_relay.enabled
+      pay_to_relay: pay_to_relay.enabled
         ? {
             selection: 'enabled' as const,
             value: {
@@ -181,27 +181,5 @@ export const configurePayments = sdk.Action.withInput(
   },
 
   // the execution function
-  async ({ effects, input }) => {
-    return configToml.merge({
-      pay_to_relay: Object.assign(
-        input,
-        input.processor.selection === 'ClnRest'
-          ? {
-              processor: 'ClnRest',
-            }
-          : {
-              processor: 'LNBits',
-              api_secret: input.processor.value.api_secret,
-            },
-        input.direct_message.selection === 'enabled'
-          ? {
-              direct_message: true,
-              ...input.direct_message.value.enabled,
-            }
-          : {
-              direct_message: false,
-            },
-      ),
-    })
-  },
+  async ({ effects, input }) => {},
 )

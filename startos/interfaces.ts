@@ -2,7 +2,7 @@ import { sdk } from './sdk'
 import { relayInterfacePort, relayInterfaceId } from './utils'
 
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
-  const apiMulti = sdk.host.multi(effects, 'ui-multi')
+  const apiMulti = sdk.MultiHost.of(effects, 'ui-multi')
   const apiMultiOrigin = await apiMulti.bindPort(relayInterfacePort, {
     protocol: 'ws',
   })
